@@ -53,17 +53,19 @@ struct doRowView: View {
                 
                 let calendar = Calendar.current
                 let today = calendar.startOfDay(for: thing.startTime)
-                let startAngle = CGFloat(thing.startTime.timeIntervalSince(today)/(86400)-0.25)
-                let finishAngle = CGFloat(thing.finishTime.timeIntervalSince(today)/(86400)-0.25)
+                let startAngle = CGFloat(thing.startTime.timeIntervalSince(today)/(86400))
+                let finishAngle = CGFloat(thing.finishTime.timeIntervalSince(today)/(86400))
                 
                 ZStack{
                     Circle()
                         .stroke(Color(red: 215/255, green: 210/255, blue: 205/255), lineWidth: 10)
                         .frame(width: 50, height: 50)
+                        .rotationEffect(.degrees(90))
                     Circle()
                         .trim(from: startAngle, to: finishAngle)
                         .stroke(Color(red: 200/255, green: 141/255, blue: 127/255), lineWidth: 18)
                         .frame(width: 50, height: 50)
+                        .rotationEffect(.degrees(-90))
                 }
             }
         }
@@ -75,6 +77,14 @@ struct doRowView: View {
 
 struct doRowView_Previews: PreviewProvider {
     static var previews: some View {
-        doRowView(thing: Thing(startTime: Date(), finishTime: Date().addingTimeInterval(3600), costMoney: false, money: 0.0, activity: "寫作業", classification: "ios", description: "噴錯誤啊啊啊啊啊ㄚ"))
+        doRowView(thing: Thing(
+                    startTime: DateComponents(calendar: Calendar.current, year: 2020, month: 11, day: 25, hour: 0, minute: 1, second: 0).date!,
+                    finishTime: DateComponents(calendar: Calendar.current, year: 2020, month: 11, day: 25, hour: 23, minute: 45, second: 0).date!,
+                    costMoney: false,
+                    money: 0.0,
+                    activity: "寫作業",
+                    classification: "ios",
+                    description: "噴錯誤啊啊啊啊啊ㄚ"))
     }
 }
+

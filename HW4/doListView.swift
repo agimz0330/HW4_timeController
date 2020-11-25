@@ -10,6 +10,12 @@ import SwiftUI
 struct doListView: View {
     @ObservedObject var thingData = ThingData()
     @State private var showAddData = false
+    @State private var searchText = ""
+    
+    var filtedThings: [Thing]{
+        return thingData.things.filter({searchText.isEmpty ? true : $0.activity.contains(searchText)})
+    }
+    
     var body: some View {
         let bgColor = Color(red: 246/255, green: 234/255, blue: 224/255)
         let redColor = Color(red: 200/255, green: 141/255, blue: 127/255)
@@ -18,7 +24,8 @@ struct doListView: View {
                 bgColor
                     .edgesIgnoringSafeArea(.all)
                 List{
-                    ForEach(thingData.things){(thing) in
+                    SearchView(text: $searchText)
+                    ForEach(filtedThings){(thing) in
                         NavigationLink(destination: addDataView(thingData: self.thingData, editThing: thing)){
                             doRowView(thing: thing)
                         }
@@ -42,6 +49,7 @@ struct doListView: View {
                     }
                 })
                 .navigationBarItems(leading: EditButton().accentColor(redColor))
+                .disabled(thingData.things.count > 99)
                 .sheet(isPresented: $showAddData){
                     addDataView(thingData: self.thingData)
                 }

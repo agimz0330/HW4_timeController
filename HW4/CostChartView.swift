@@ -41,6 +41,9 @@ struct CostChartView: View {
             bgColor
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack{
+                Text("總支出: $ \(totalCost, specifier: "%.0f")元")
+                    .font(.custom("HanyiSentyFingerPainting", size: 40))
+                    .foregroundColor(redColor)
                 PieChartView(startAngle: angles)
                     .frame(width: 200, height: 200)
                 Group{
@@ -51,9 +54,9 @@ struct CostChartView: View {
                                     .frame(width:100, height: 20)
                                     .cornerRadius(25)
                                 Text("\(dododo[i]) ")
-                                    .font(.custom("HanyiSentyChalkOriginal", size: 25))
+                                    .font(.custom("HanyiSentyChalkOriginal", size: 20))
                                     .foregroundColor(redColor)
-                                Text("(\(countCost[i]/totalCost, specifier: "%.2f")%)")
+                                Text("(\(countCost[i]/totalCost*100, specifier: "%.0f")%)")
                                     .font(.custom("WildySansRegular", size: 25))
                                     .foregroundColor(redColor)
                             }

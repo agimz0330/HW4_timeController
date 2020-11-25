@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimeHistView: View {
     @ObservedObject var thingData = ThingData()
+    @State private var h: CGFloat = 0
     
     var totalTime: Double = 0
     var dododo = ["吃飯","睡覺","逛街","讀書","通勤","遊戲","上課","寫作業","聊天","梳洗","耍廢"]
@@ -39,13 +40,24 @@ struct TimeHistView: View {
             VStack{
                 HStack(alignment: .bottom){
                     ForEach(0 ..< countTime.count){(i) in
-                        if countTime[i] != 0{
+                        if countTime[i] >= 10{
                             VStack{
-                                Rectangle()
-                                    .fill(Color(red: red[i]/255, green: green[i]/255, blue: blue[i]/255))
-                                    .frame(width: 25, height: CGFloat(countTime[i]/120))
+                                ZStack(alignment: .bottom){
+                                    Rectangle()
+                                        .fill(Color(red: 120/255, green: 180/255, blue: 130/255))
+                                        .frame(width: 25, height: h)
+                                        .cornerRadius(.infinity)
+                                    Rectangle()
+                                        .fill(Color(red: red[i]/255, green: green[i]/255, blue: blue[i]/255))
+                                        .frame(width: 25, height: CGFloat(countTime[i]/200))
+                                        .cornerRadius(.infinity)
+                                        .animation(.linear(duration: 2))
+                                        .onAppear{
+                                            h = CGFloat(totalTime/200)
+                                        }
+                                }
                                 Text("\(dododo[i])")
-                                    .font(.custom("HanyiSentyChalkOriginal", size: 25))
+                                    .font(.custom("HanyiSentyChalkOriginal", size: 15))
                                     .foregroundColor(redColor)
                             }
                         }

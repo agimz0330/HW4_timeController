@@ -24,6 +24,7 @@ struct addDataView: View {
     var editThing: Thing?
     
     var body: some View {
+        let redColor = Color(red: 190/255, green: 131/255, blue: 117/255)
         NavigationView{
             Form{
                 DatePicker("今天是：", selection: $startTime, displayedComponents: .date)
@@ -57,7 +58,24 @@ struct addDataView: View {
                     Slider(value: $money, in: 0...1000, step: 10)
                 }
                 TextField("加點說明：", text: $description)
-                    .frame(height: 180)
+                HStack{
+                    Spacer()
+                    Image("fighting")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        
+                    Spacer()
+                }
+                .overlay(ZStack{
+                    Text("Fighting")
+                        .font(.custom("WildySansRegular", size: 100))
+                        .foregroundColor(Color.white)
+                    Text("Fighting")
+                        .font(.custom("WildySansRegular", size: 100))
+                        .foregroundColor(redColor)
+                        .offset(x: 5, y: 5)
+                })
             }
             .navigationBarItems(trailing: Button("Save"){
                 let oneThing = Thing(startTime: self.startTime, finishTime: self.finishTime, costMoney: self.costMoney, money: self.money, activity: activities[pickActionIndex].action, classification: activities[pickActionIndex].classification[classIndex[pickActionIndex]], description: self.description)
