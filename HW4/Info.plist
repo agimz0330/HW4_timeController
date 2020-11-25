@@ -20,6 +20,15 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pollutant.ttf</string>
+		<string>Winter Bells.ttf</string>
+		<string>Wildy-Sans.ttf</string>
+		<string>HanyiSentyCrayon.ttf</string>
+		<string>HanyiSentyFingerPainting.ttf</string>
+		<string>HenyiSentyChalk 2018.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
